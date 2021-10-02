@@ -11,19 +11,33 @@ import javax.ws.rs.core.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 @Path("/calculate")
 public class CalculateService {
 
-	@Path("{f}")
+	@Path("{value}")
 	@GET
 	@Produces("application/json")
-	public Response calculateParantesesCombination(@PathParam("f") int f) throws JSONException {
+	
+	public Response calculateParantesesCombination(@PathParam("value") int value) throws JSONException {
 		
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("CombParan",calculatePairOfParantesis(f).size());
- 
+		
+		if(value==0) {
+			jsonObject.put("combination",0);
+		}else {
+			jsonObject.put("combination",calculatePairOfParantesis(value).size());
+		}
+	
 		String result =  jsonObject.toString();
-		return Response.status(200).entity(result).build();
+		return Response.status(200)
+				.header("Access-Control-Allow-Origin", "*")
+			      .header("Access-Control-Allow-Credentials", "true")
+			      .header("Access-Control-Allow-Headers",
+			        "origin, content-type, accept, authorization")
+			      .header("Access-Control-Allow-Methods", 
+			        "GET, POST, PUT, DELETE, OPTIONS, HEAD")
+			      .entity(result).build();
 	}
 	
     public static List<String> calculatePairOfParantesis(int n) {
