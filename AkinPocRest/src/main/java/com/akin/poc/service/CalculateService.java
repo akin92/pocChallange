@@ -8,7 +8,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
-import org.json.JSONException;
 import org.json.JSONObject;
 import com.akin.poc.controller.CalculateController;
 import com.akin.poc.exceptions.CustomException;
@@ -29,7 +28,7 @@ public class CalculateService {
 	@Path("{value}")
 	@GET
 	@Produces("application/json")
-	public Response calculateParantesesCombination(@PathParam("value") int value) throws JSONException {
+	public Response calculateParantesesCombination(@PathParam("value") int value)  {
 
 		JSONObject jsonObject = new JSONObject();
 		try {
