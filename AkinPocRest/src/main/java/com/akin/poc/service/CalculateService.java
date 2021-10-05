@@ -2,7 +2,7 @@ package com.akin.poc.service;
 
 import java.util.logging.Logger;
 
-import javax.inject.Inject;
+import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -19,7 +19,7 @@ public class CalculateService {
 	
 	private final static Logger logger = Logger.getLogger(CalculateService.class.getName());
 
-	@Inject
+	@EJB
 	CalculateController calculateController;
 	
 	public CalculateService() {
