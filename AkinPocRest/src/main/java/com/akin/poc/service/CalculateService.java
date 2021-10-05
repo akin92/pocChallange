@@ -1,7 +1,8 @@
 package com.akin.poc.service;
 
-import javax.annotation.Resource;
-import javax.ejb.Stateless;
+import java.util.logging.Logger;
+
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,10 +13,13 @@ import org.json.JSONObject;
 import com.akin.poc.controller.CalculateController;
 import com.akin.poc.exceptions.CustomException;
 
+
 @Path("/calculate")
 public class CalculateService {
+	
+	private final static Logger logger = Logger.getLogger(CalculateService.class.getName());
 
-	@Resource
+	@Inject
 	CalculateController calculateController;
 	
 	public CalculateService() {
@@ -32,7 +36,7 @@ public class CalculateService {
 			jsonObject.put("combination", calculateController.calculatePairOfParantesis(value).size());
 		} catch (CustomException e) {
 			jsonObject.put("combination", 0);
-			System.out.print(e.getMessage());
+			logger.info(e.getMessage());
 		}
 		return Response.status(200).header("Access-Control-Allow-Origin", "*")
 				.header("Access-Control-Allow-Credentials", "true")
